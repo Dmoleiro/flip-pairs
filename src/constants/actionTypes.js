@@ -1,0 +1,1 @@
+export const SET_TILE_COUNT = 'SET_TILE_COUNT';

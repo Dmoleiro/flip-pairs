@@ -1,0 +1,79 @@
+.controlPanelContainer {
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 95%;
+    line-height: 1.5;
+    font-family: 'Open Sans',sans-serif;
+    color: #333;
+    text-align: center;
+}
+
+.controlPanelTitle {
+    color: #000000;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: left;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+.box {
+    width: 100%;
+    max-width: 100px;
+    background: white;
+    border: 1px solid white;
+    border-radius: 3px;
+    text-align: left;
+}
+
+input[type=radio] {
+    display: none;
+}
+
+.active-label, label:focus, label:hover, label:active, input:checked + label {
+    color: #e00a00;
+}
+
+.active-label:before, label:focus:before, label:hover:before, label:active:before, input:checked + label:before {
+    background: white;
+    border-color: #e00a00;
+}
+
+label {
+    font-size: 1rem;
+    font-weight: bold;
+    line-height: 1;
+    cursor: pointer;
+    display: block;
+    padding: 1rem 1rem 1rem 3rem;
+    position: relative;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    background: white;
+    whitespace: no-wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: all .15s ease;
+}
+
+label:first-of-type {
+    border: 0;
+}
+
+label:before {
+    content: "";
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: .2rem solid #ccc;
+}
+
+input:checked + label:before {
+    border-color: white;
+    border: none;
+    background: #e00a00;
+}
