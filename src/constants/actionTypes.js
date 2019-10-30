@@ -1,1 +1,2 @@
 export const SET_TILE_COUNT = 'SET_TILE_COUNT';
+export const TOGGLE_FLIP_ALL_TILES = 'TOGGLE_FLIP_ALL_TILES';

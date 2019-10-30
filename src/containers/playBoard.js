@@ -5,7 +5,7 @@ import styles from '../styles/playBoard.module.css';
 import Card from '../components/card';
 import ControlPanel from '../components/controlPanel';
 //actions
-import {setTileCount} from "../actions/layoutActions";
+import {setTileCount, toggleFlipAllTiles} from "../actions/layoutActions";
 
 const mapStateToProps = (state, ownProps) => {
     return {tileCount: state.fp.tileCount};
@@ -43,25 +43,36 @@ class PlayBoard extends Component {
             store.dispatch(setTileCount(tileCount));
         }
     }
+    _flip() {
+        if (this.props.store !== undefined) {
+            this.props.store.dispatch(toggleFlipAllTiles());
+        }
+    }
 
-    render() {
+    _generateMatrixDivs() {
         let store = this.props.store;
         let storeData = store.getState();
-        let tileCount = storeData.fp.tileCount;
+        let stateMatrix = storeData.fp.selectedStateMatrix;
 
-        let cards = new Array(tileCount);
-        cards.fill('');
-
-        cards = cards.map((card, index) => {
-            card = (
-                <Card idx={index} key={index}/>
-            );
-            return card;
+        return stateMatrix.map((line, index) => {
+           return (
+               <div className={styles.matrixLine} key={index}>
+                   {
+                       line.map((card, index) => {
+                       card = (
+                           <Card idx={index} key={index} isFlipped={false} flip={() => this._flip()}/>
+                       );
+                       return card;
+                    })
+                   }
+               </div>
+           );
         });
+    }
 
-        for (let i =0; i < cards.length; i++) {
 
-        }
+    render() {
+        let cards = this._generateMatrixDivs();
         return (
             <div className={styles.container}>
                 <ControlPanel store={this.props.store} />
