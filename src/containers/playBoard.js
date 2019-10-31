@@ -5,10 +5,13 @@ import styles from '../styles/playBoard.module.css';
 import Card from '../components/card';
 import ControlPanel from '../components/controlPanel';
 //actions
-import {setTileCount, toggleFlipAllTiles} from "../actions/layoutActions";
+import {setTileCount, toggleFlipAllTiles, toggleFlipTile} from "../actions/layoutActions";
 
 const mapStateToProps = (state, ownProps) => {
-    return {tileCount: state.fp.tileCount};
+    return {
+        tileCount: state.fp.tileCount,
+        selectedStateMatrix: state.fp.selectedStateMatrix
+    };
 };
 
 class PlayBoard extends Component {
@@ -24,7 +27,8 @@ class PlayBoard extends Component {
 
         this.setState({
             ...this.state,
-            tileCount: storeData.fp.tileCount
+            tileCount: storeData.fp.tileCount,
+            selectedStateMatrix: storeData.fp.selectedStateMatrix
         });
     }
 
@@ -34,6 +38,7 @@ class PlayBoard extends Component {
 
         if (nextProps && storeData) {
             state.tileCount = storeData.fp.tileCount;
+            state.selectedStateMatrix = storeData.fp.selectedStateMatrix;
             return state;
         }
         return null;
@@ -43,9 +48,15 @@ class PlayBoard extends Component {
             store.dispatch(setTileCount(tileCount));
         }
     }
-    _flip() {
+    _flipAll() {
         if (this.props.store !== undefined) {
             this.props.store.dispatch(toggleFlipAllTiles());
+        }
+    }
+
+    _flipTile(row, col) {
+        if (this.props.store !== undefined) {
+            this.props.store.dispatch(toggleFlipTile(row, col));
         }
     }
 
@@ -54,15 +65,15 @@ class PlayBoard extends Component {
         let storeData = store.getState();
         let stateMatrix = storeData.fp.selectedStateMatrix;
 
-        return stateMatrix.map((line, index) => {
+        return stateMatrix.map((line, indexRow) => {
            return (
-               <div className={styles.matrixLine} key={index}>
+               <div className={styles.matrixLine} key={indexRow}>
                    {
-                       line.map((card, index) => {
-                       card = (
-                           <Card idx={index} key={index} isFlipped={false} flip={() => this._flip()}/>
+                       line.map((card, indexColumn) => {
+                       let cardElm = (
+                           <Card key={`${indexRow}-${indexColumn}`} row={indexRow} col={indexColumn} isFlipped={card} flip={() => this._flipTile(indexRow, indexColumn)}/>
                        );
-                       return card;
+                       return cardElm;
                     })
                    }
                </div>
@@ -76,8 +87,9 @@ class PlayBoard extends Component {
         return (
             <div className={styles.container}>
                 <ControlPanel store={this.props.store} />
-
-                {cards}
+                <div className={styles.cardsContainer}>
+                    {cards}
+                </div>
             </div>
         );
     }
