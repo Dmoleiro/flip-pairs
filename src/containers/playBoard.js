@@ -71,7 +71,13 @@ class PlayBoard extends Component {
                    {
                        line.map((card, indexColumn) => {
                        let cardElm = (
-                           <Card key={`${indexRow}-${indexColumn}`} row={indexRow} col={indexColumn} isFlipped={card} flip={() => this._flipTile(indexRow, indexColumn)}/>
+                           <Card key={`${indexRow}-${indexColumn}`}
+                                 row={indexRow}
+                                 col={indexColumn}
+                                 url={stateMatrix[indexRow][indexColumn].url}
+                                 imgId={stateMatrix[indexRow][indexColumn].imgId}
+                                 isFlipped={card.flipped}
+                                 flip={() => this._flipTile(indexRow, indexColumn)}/>
                        );
                        return cardElm;
                     })
