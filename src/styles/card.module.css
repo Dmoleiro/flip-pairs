@@ -1,59 +1,58 @@
 .cardContainer {
-    min-width: 200px;
-    width: 200px;
-    height: 200px;
-    float: left;
-    list-style: none;
-    margin-right: 20px;
-    margin-bottom: 50px;
-    position: relative;
+    flex: 1;
+    border-radius: 5px;
+    max-width: 200px;
+    max-height: 200px;
+    width: 100px;
+    height: 100%;
+    min-width: 30px;
+    min-height: 30px;
     cursor: pointer;
-    counter-increment: item;
+    margin: 0 5px 0 5px;
 }
 
 .cardContainer div {
     width: 100%;
     height: 100%;
-    position: absolute;
     border-radius: 5px;
-    transition: all .5s;
-    backface-visibility: hidden;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
 }
 
-.cardContainer img {
+
+.scene {
+    perspective: 600px;
+}
+
+.card {
     width: 100%;
     height: 100%;
+    position: relative;
+    transition: transform 1s;
+    transform-style: preserve-3d;
+}
+
+.cardFace {
     position: absolute;
-    border-radius: 5px;
+    height: 100%;
+    width: 100%;
+    backface-visibility: hidden;
 }
 
-.cardContainer:hover .front {
-    z-index: 0;
-    transform: rotateY(180deg);
-}
-
-.cardContainer:hover .back {
-    transform: rotateY(0);
-}
-
-.front {
-    z-index: 3;
-    color: #333;
-    text-align: center;
-    line-height: 200px;
-    font-size: 80px;
-    font-family: 'Faster One', cursive;
-    background: #c3211c;
-    background: -webkit-linear-gradient(45deg, rgba(44, 38, 46, 0.54) 10%, #c3211c 80%);
+.cardFaceFront {
     background: linear-gradient(45deg, #2c262e 10%, #c3211c 80%);
 }
 
-.front:after {
-    color: #ffffff;
-    content: counter(item);
+.cardFaceBack {
+    background: linear-gradient(45deg, #11112e 10%, #0300c3 80%);
+    transform: rotateY( 180deg );
 }
 
-.back {
+.card.isFlipped {
     transform: rotateY(180deg);
+}
+
+.cardImg {
+    border-radius: 5px;
+    height: 100%;
+    width: 100%;
 }

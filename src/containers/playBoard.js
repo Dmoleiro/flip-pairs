@@ -5,10 +5,13 @@ import styles from '../styles/playBoard.module.css';
 import Card from '../components/card';
 import ControlPanel from '../components/controlPanel';
 //actions
-import {setTileCount} from "../actions/layoutActions";
+import {setTileCount, toggleFlipAllTiles, toggleFlipTile} from "../actions/layoutActions";
 
 const mapStateToProps = (state, ownProps) => {
-    return {tileCount: state.fp.tileCount};
+    return {
+        tileCount: state.fp.tileCount,
+        selectedStateMatrix: state.fp.selectedStateMatrix
+    };
 };
 
 class PlayBoard extends Component {
@@ -24,7 +27,8 @@ class PlayBoard extends Component {
 
         this.setState({
             ...this.state,
-            tileCount: storeData.fp.tileCount
+            tileCount: storeData.fp.tileCount,
+            selectedStateMatrix: storeData.fp.selectedStateMatrix
         });
     }
 
@@ -34,6 +38,7 @@ class PlayBoard extends Component {
 
         if (nextProps && storeData) {
             state.tileCount = storeData.fp.tileCount;
+            state.selectedStateMatrix = storeData.fp.selectedStateMatrix;
             return state;
         }
         return null;
@@ -43,30 +48,54 @@ class PlayBoard extends Component {
             store.dispatch(setTileCount(tileCount));
         }
     }
+    _flipAll() {
+        if (this.props.store !== undefined) {
+            this.props.store.dispatch(toggleFlipAllTiles());
+        }
+    }
 
-    render() {
+    _flipTile(row, col) {
+        if (this.props.store !== undefined) {
+            this.props.store.dispatch(toggleFlipTile(row, col));
+        }
+    }
+
+    _generateMatrixDivs() {
         let store = this.props.store;
         let storeData = store.getState();
-        let tileCount = storeData.fp.tileCount;
+        let stateMatrix = storeData.fp.selectedStateMatrix;
 
-        let cards = new Array(tileCount);
-        cards.fill('');
-
-        cards = cards.map((card, index) => {
-            card = (
-                <Card idx={index} key={index}/>
-            );
-            return card;
+        return stateMatrix.map((line, indexRow) => {
+           return (
+               <div className={styles.matrixLine} key={indexRow}>
+                   {
+                       line.map((card, indexColumn) => {
+                       let cardElm = (
+                           <Card key={`${indexRow}-${indexColumn}`}
+                                 row={indexRow}
+                                 col={indexColumn}
+                                 url={stateMatrix[indexRow][indexColumn].url}
+                                 imgId={stateMatrix[indexRow][indexColumn].imgId}
+                                 isFlipped={card.flipped}
+                                 flip={() => this._flipTile(indexRow, indexColumn)}/>
+                       );
+                       return cardElm;
+                    })
+                   }
+               </div>
+           );
         });
+    }
 
-        for (let i =0; i < cards.length; i++) {
 
-        }
+    render() {
+        let cards = this._generateMatrixDivs();
         return (
             <div className={styles.container}>
                 <ControlPanel store={this.props.store} />
-
-                {cards}
+                <div className={styles.cardsContainer}>
+                    {cards}
+                </div>
             </div>
         );
     }
