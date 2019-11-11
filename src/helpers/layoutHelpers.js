@@ -13,7 +13,7 @@ export function generateSelectedStateMatrix(complexity) {
             for (let i=0; i<selectedStateMatrix.length; i++) {
                 selectedStateMatrix[i] = new Array(rowItemCount);
                 for (let j=0; j<selectedStateMatrix[i].length; j++){
-                    let urlIndex = Math.floor(Math.random() * Math.floor(urlList.length))
+                    let urlIndex = Math.floor(Math.random() * urlList.length)
                     selectedStateMatrix[i][j] = {
                         flipped: false,
                         done: false,
@@ -48,8 +48,13 @@ export function toggleMatrixState(matrix) {
 
 export function flipTile(matrix, row, col) {
     if (matrix !== undefined && row !== undefined && col !== undefined && !matrix[row][col].done) {
-        matrix[row][col].done = isImageAlreadyFlipped(matrix, matrix[row][col].imgId);
-        matrix[row][col].flipped = !matrix[row][col].flipped;
+        if (matrix[row][col].done === false) {
+            if (!matrix[row][col].flipped) {
+                matrix[row][col].done = isImageAlreadyFlipped(matrix, matrix[row][col].imgId);
+            }
+            matrix[row][col].flipped = !matrix[row][col].flipped;
+        }
+
     }
     return matrix;
 }
@@ -68,12 +73,13 @@ function createUrlList(length) {
 function isImageAlreadyFlipped(matrix, imgId) {
     let item = undefined;
     if (matrix !== undefined && imgId !== undefined) {
-        item =
-            matrix.find((line) =>
-                line.find((item) => {
-                    return (item.imgId === imgId && item.flipped === true);
-                })
-            );
+        for (let i = 0; i < matrix.length; i++) {
+            for (let j = 0; j < matrix[i].length; j++) {
+                if (matrix[i][j].imgId === imgId && matrix[i][j].flipped === true) {
+                    item = matrix[i][j];
+                }
+            }
+        }
     }
 
     if (item !== undefined) {
