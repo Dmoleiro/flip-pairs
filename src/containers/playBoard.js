@@ -65,26 +65,28 @@ class PlayBoard extends Component {
         let storeData = store.getState();
         let stateMatrix = storeData.fp.selectedStateMatrix;
 
+        if (stateMatrix !== undefined) {
         return stateMatrix.map((line, indexRow) => {
-           return (
-               <div className={styles.matrixLine} key={indexRow}>
-                   {
-                       line.map((card, indexColumn) => {
-                       let cardElm = (
-                           <Card key={`${indexRow}-${indexColumn}`}
-                                 row={indexRow}
-                                 col={indexColumn}
-                                 url={stateMatrix[indexRow][indexColumn].url}
-                                 imgId={stateMatrix[indexRow][indexColumn].imgId}
-                                 isFlipped={card.flipped}
-                                 flip={() => this._flipTile(indexRow, indexColumn)}/>
-                       );
-                       return cardElm;
-                    })
-                   }
-               </div>
-           );
+            return (
+                <div className={styles.matrixLine} key={indexRow}>
+                    {
+                        line.map((card, indexColumn) => {
+                            let cardElm = (
+                                <Card key={`${indexRow}-${indexColumn}`}
+                                      row={indexRow}
+                                      col={indexColumn}
+                                      url={stateMatrix[indexRow][indexColumn].url}
+                                      imgId={stateMatrix[indexRow][indexColumn].imgId}
+                                      isFlipped={card.flipped}
+                                      flip={() => this._flipTile(indexRow, indexColumn)}/>
+                            );
+                            return cardElm;
+                        })
+                    }
+                </div>
+            );
         });
+        }
     }
 
 

@@ -1,7 +1,7 @@
 import {generateSelectedStateMatrix} from "../helpers/layoutHelpers";
-import {FOUR_BY_FOUR} from "./gameComplexities";
+import {NOT_BY_NOT} from "./gameComplexities";
 
 export default {
-    tileCount: FOUR_BY_FOUR,
-    selectedStateMatrix: generateSelectedStateMatrix(FOUR_BY_FOUR),
+    tileCount: NOT_BY_NOT,
+    selectedStateMatrix: generateSelectedStateMatrix(NOT_BY_NOT),
 }

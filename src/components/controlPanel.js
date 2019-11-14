@@ -48,14 +48,15 @@ class ControlPanel extends Component {
 
         return (
             <div className={styles.controlPanelContainer}>
-                <div className={styles.controlPanelTitle}>Control Panel</div>
                 <div className={styles.box}>
+                    <div className={styles.title}>Choose Game Complexity</div>
                     <input type="radio" id="radio1" name="radio1" onClick={() => this._setTileCount(TWO_BY_TWO, this.props.store)} defaultChecked={tileCount === TWO_BY_TWO}/>
                     <label htmlFor="radio1">{TWO_BY_TWO}</label>
                     <input type="radio" id="radio2" name="radio1" onClick={() => this._setTileCount(FOUR_BY_FOUR, this.props.store)} defaultChecked={tileCount === FOUR_BY_FOUR}/>
                     <label htmlFor="radio2">{FOUR_BY_FOUR}</label>
                     <input type="radio" id="radio3" name="radio1" onClick={() => this._setTileCount(SIX_BY_SIX, this.props.store)} defaultChecked={tileCount === SIX_BY_SIX}/>
                     <label htmlFor="radio3">{SIX_BY_SIX}</label>
+                    <div className={styles.reload}>reload</div>
                 </div>
             </div>
         );

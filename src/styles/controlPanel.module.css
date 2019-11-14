@@ -8,45 +8,33 @@
     text-align: center;
 }
 
-.controlPanelTitle {
-    color: #000000;
-    font-size: 20px;
-    font-weight: bold;
-    text-align: left;
-}
-
 *, *:before, *:after {
     box-sizing: inherit;
 }
 
+.title {
+    display: inline;
+    font-weight: bold;
+}
+
 .box {
+    display: inline-block;
     width: 100%;
-    max-width: 100px;
     background: white;
     border: 1px solid white;
     border-radius: 3px;
-    text-align: left;
 }
 
 input[type=radio] {
     display: none;
 }
 
-.active-label, label:focus, label:hover, label:active, input:checked + label {
-    color: #e00a00;
-}
-
-.active-label:before, label:focus:before, label:hover:before, label:active:before, input:checked + label:before {
-    background: white;
-    border-color: #e00a00;
-}
 
 label {
     font-size: 1rem;
     font-weight: bold;
     line-height: 1;
     cursor: pointer;
-    display: block;
     padding: 1rem 1rem 1rem 3rem;
     position: relative;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
@@ -72,8 +60,25 @@ label:before {
     border: .2rem solid #ccc;
 }
 
+
 input:checked + label:before {
     border-color: white;
     border: none;
     background: #e00a00;
+}
+
+.reload {
+    content: "";
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: .2rem solid #ccc;
+
+    font-size: 1rem;
+    font-weight: bold;
+    line-height: 1;
+    cursor: pointer;
 }
