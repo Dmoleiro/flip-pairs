@@ -1,5 +1,6 @@
 {
   "name": "flip-pairs",
+  "homepage": "https://dmoleiro.github.io/flip-pairs/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
