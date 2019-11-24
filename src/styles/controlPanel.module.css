@@ -18,11 +18,15 @@
 }
 
 .box {
-    display: inline-block;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     width: 100%;
-    background: white;
-    border: 1px solid white;
     border-radius: 3px;
+}
+
+.controlElement{
+    flex: 1;
 }
 
 input[type=radio] {
@@ -37,8 +41,6 @@ label {
     cursor: pointer;
     padding: 1rem 1rem 1rem 3rem;
     position: relative;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    background: white;
     whitespace: no-wrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -67,18 +69,9 @@ input:checked + label:before {
     background: #e00a00;
 }
 
-.reload {
-    content: "";
-    position: absolute;
-    left: 1rem;
-    top: 1rem;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    border: .2rem solid #ccc;
-
+.reset {
+    background: red;
     font-size: 1rem;
     font-weight: bold;
-    line-height: 1;
     cursor: pointer;
 }

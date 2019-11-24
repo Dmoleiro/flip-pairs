@@ -1,4 +1,4 @@
-import {FLIP_TILE, SET_TILE_COUNT, TOGGLE_FLIP_ALL_TILES} from '../constants/actionTypes';
+import {FLIP_TILE, RESET_TILES, SET_TILE_COUNT, TOGGLE_FLIP_ALL_TILES} from '../constants/actionTypes';
 import {flipTile, generateSelectedStateMatrix, toggleMatrixState} from "../helpers/layoutHelpers";
 
 export default(state, action) => {
@@ -10,8 +10,13 @@ export default(state, action) => {
             tileCount: action.tileCount,
             selectedStateMatrix: generateSelectedStateMatrix(action.tileCount)
         };
+      case RESET_TILES:
+        return {
+            ...state,
+            selectedStateMatrix: generateSelectedStateMatrix(state.tileCount)
+        };
       case TOGGLE_FLIP_ALL_TILES:
-          newSelectedStateMatrix = toggleMatrixState(state.selectedStateMatrix.slice());
+          newSelectedStateMatrix = toggleMatrixState(state.selectedStateMatrix.slice(), action.forceState, action.flipDone);
 
           return {
               ...state,

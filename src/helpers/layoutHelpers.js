@@ -19,7 +19,7 @@ export function generateSelectedStateMatrix(complexity) {
                             flipped: true,
                             done: false,
                             url: urlList[urlIndex].url,
-                            imgId: urlIndex
+                            imgId: urlList[urlIndex].originalIdx,
                         };
 
                         urlList[urlIndex].timesUsed = urlList[urlIndex].timesUsed + 1;
@@ -36,12 +36,14 @@ export function generateSelectedStateMatrix(complexity) {
     return selectedStateMatrix;
 }
 
-export function toggleMatrixState(matrix) {
+export function toggleMatrixState(matrix, forceState, flipDone) {
     if (matrix !== undefined) {
         for (let i = 0; i < matrix.length; i++) {
             for (let j = 0; j < matrix[i].length; j++) {
-                matrix[i][j].flipped = !matrix[i][j].flipped;
-                matrix[i][j].done = false;
+                if ((!flipDone && !matrix[i][j].done) || flipDone) {
+                    matrix[i][j].flipped = forceState !== undefined ? forceState : !matrix[i][j].flipped;
+                    matrix[i][j].done = false;
+                }
             }
         }
     }
@@ -52,7 +54,8 @@ export function flipTile(matrix, row, col) {
     if (matrix !== undefined && row !== undefined && col !== undefined && !matrix[row][col].done) {
         if (matrix[row][col].done === false) {
             if (!matrix[row][col].flipped) {
-                matrix[row][col].done = isImageAlreadyFlipped(matrix, matrix[row][col].imgId);
+                let isMatch = isImageAlreadyFlipped(matrix, matrix[row][col].imgId);
+                matrix[row][col].done = isMatch;
             }
             matrix[row][col].flipped = !matrix[row][col].flipped;
         }
@@ -66,7 +69,8 @@ function createUrlList(length) {
     for (let i=0; i<urlList.length; i++){
         urlList[i] = {
             url: ("https://picsum.photos/300/300?bust=" + Math.floor(Math.random() * Math.floor(length)) + i),
-            timesUsed: 0
+            timesUsed: 0,
+            originalIdx: i,
         }
     }
     return urlList;
