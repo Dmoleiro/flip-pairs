@@ -1,4 +1,10 @@
-import {FLIP_TILE, RESET_TILES, SET_TILE_COUNT, TOGGLE_FLIP_ALL_TILES} from '../constants/actionTypes';
+import {
+    FLIP_TILE,
+    RESET_TILES,
+    SET_TILE_COUNT,
+    TOGGLE_CELEBRATION,
+    TOGGLE_FLIP_ALL_TILES
+} from '../constants/actionTypes';
 import {flipTile, generateSelectedStateMatrix, toggleMatrixState} from "../helpers/layoutHelpers";
 
 export default(state, action) => {
@@ -8,12 +14,16 @@ export default(state, action) => {
         return {
             ...state,
             tileCount: action.tileCount,
-            selectedStateMatrix: generateSelectedStateMatrix(action.tileCount)
+            selectedStateMatrix: generateSelectedStateMatrix(action.tileCount),
+            previewFlip: true,
+            celebration: false,
         };
       case RESET_TILES:
         return {
             ...state,
-            selectedStateMatrix: generateSelectedStateMatrix(state.tileCount)
+            selectedStateMatrix: generateSelectedStateMatrix(state.tileCount),
+            previewFlip: true,
+            celebration: false,
         };
       case TOGGLE_FLIP_ALL_TILES:
           newSelectedStateMatrix = toggleMatrixState(state.selectedStateMatrix.slice(), action.forceState, action.flipDone);
@@ -21,6 +31,7 @@ export default(state, action) => {
           return {
               ...state,
               selectedStateMatrix: newSelectedStateMatrix,
+              previewFlip: action.previewFlip,
           };
       case FLIP_TILE:
           newSelectedStateMatrix = flipTile(state.selectedStateMatrix.slice(), action.row, action.col);
@@ -28,6 +39,11 @@ export default(state, action) => {
           return {
               ...state,
               selectedStateMatrix: newSelectedStateMatrix,
+          };
+      case TOGGLE_CELEBRATION:
+          return {
+              ...state,
+              celebration: !state.celebration,
           };
     default:
       return state;

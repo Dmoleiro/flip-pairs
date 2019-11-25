@@ -5,12 +5,14 @@ import styles from '../styles/playBoard.module.css';
 import Card from '../components/card';
 import ControlPanel from '../components/controlPanel';
 //actions
-import {setTileCount, toggleFlipAllTiles, toggleFlipTile} from "../actions/layoutActions";
+import {toggleFlipTile} from "../actions/layoutActions";
+import Celebration from "../components/celebration";
 
 const mapStateToProps = (state, ownProps) => {
     return {
         tileCount: state.fp.tileCount,
-        selectedStateMatrix: state.fp.selectedStateMatrix
+        selectedStateMatrix: state.fp.selectedStateMatrix,
+        celebration: state.fp.celebration,
     };
 };
 
@@ -28,7 +30,8 @@ class PlayBoard extends Component {
         this.setState({
             ...this.state,
             tileCount: storeData.fp.tileCount,
-            selectedStateMatrix: storeData.fp.selectedStateMatrix
+            selectedStateMatrix: storeData.fp.selectedStateMatrix,
+            celebration: storeData.fp.celebration,
         });
     }
 
@@ -39,19 +42,10 @@ class PlayBoard extends Component {
         if (nextProps && storeData) {
             state.tileCount = storeData.fp.tileCount;
             state.selectedStateMatrix = storeData.fp.selectedStateMatrix;
+            state.celebration = storeData.fp.celebration;
             return state;
         }
         return null;
-    }
-    _setTileCount(tileCount, store) {
-        if (store !== undefined && tileCount > 0) {
-            store.dispatch(setTileCount(tileCount));
-        }
-    }
-    _flipAll() {
-        if (this.props.store !== undefined) {
-            this.props.store.dispatch(toggleFlipAllTiles());
-        }
     }
 
     _flipTile(row, col) {
@@ -92,8 +86,13 @@ class PlayBoard extends Component {
 
     render() {
         let cards = this._generateMatrixDivs();
+        let celebrate;
+        if (this.state.celebration) {
+            celebrate = (<Celebration/>);
+        }
         return (
             <div className={styles.container}>
+                {celebrate}
                 <ControlPanel store={this.props.store} />
                 <div className={styles.cardsContainer}>
                     {cards}

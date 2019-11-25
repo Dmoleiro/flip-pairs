@@ -64,6 +64,34 @@ export function flipTile(matrix, row, col) {
     return matrix;
 }
 
+export function countFlippedCards(matrix, countUndone = false) {
+    let flippedCount = 0;
+    if (matrix !== undefined  && matrix.length > 0){
+        for (let i=0; i < matrix.length; i++){
+            for (let j=0; j < matrix[i].length; j++){
+                if ((countUndone && isCardFlippedAndUndone(matrix[i][j])) || (!countUndone && isCardFlipped(matrix[i][j]))) {
+                    flippedCount++;
+                }
+            }
+        }
+    }
+    return flippedCount;
+}
+
+function isCardFlippedAndUndone(card) {
+    if (card !== undefined) {
+        return card.flipped && !card.done
+    }
+    return false;
+}
+
+function isCardFlipped(card) {
+    if (card !== undefined) {
+        return card.flipped;
+    }
+    return false;
+}
+
 function createUrlList(length) {
     let urlList = new Array(length);
     for (let i=0; i<urlList.length; i++){
@@ -93,3 +121,4 @@ function isImageAlreadyFlipped(matrix, imgId) {
     }
     return item !== undefined;
 }
+

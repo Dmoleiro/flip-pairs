@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from "react-redux";
 import styles from '../styles/controlPanel.module.css';
 import {resetTiles, setTileCount} from "../actions/layoutActions";
-import {SIX_BY_SIX, TWO_BY_TWO, FOUR_BY_FOUR} from "../constants/gameComplexities";
+import {SIX_BY_SIX, TWO_BY_TWO, FOUR_BY_FOUR, NOT_BY_NOT} from "../constants/gameComplexities";
 
 const mapStateToProps = (state, ownProps) => {
     return {tileCount: state.fp.tileCount};
@@ -74,7 +74,7 @@ class ControlPanel extends Component {
                         <label htmlFor="radio3">{SIX_BY_SIX}</label>
                     </div>
 
-                    <div className={styles.controlElement}>
+                    <div className={`${styles.controlElement} ${tileCount === NOT_BY_NOT ? styles.hidden : ''}`}>
                         <div className={styles.reset} onClick={() => this._resetMatrix(this.props.store)}>reset</div>
                     </div>
 

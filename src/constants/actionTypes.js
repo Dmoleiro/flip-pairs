@@ -1,4 +1,6 @@
+export const IGNORE = 'IGNORE';
 export const SET_TILE_COUNT = 'SET_TILE_COUNT';
 export const TOGGLE_FLIP_ALL_TILES = 'TOGGLE_FLIP_ALL_TILES';
 export const FLIP_TILE = 'FLIP_TILE';
 export const RESET_TILES = 'RESET_TILES';
+export const TOGGLE_CELEBRATION = 'TOGGLE_CELEBRATION';
