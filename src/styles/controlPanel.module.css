@@ -12,6 +12,25 @@
     box-sizing: inherit;
 }
 
+.modalBackground {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: #5e5e5f99;
+}
+
+.modal {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    background: #ffffff;
+    border-radius: 5px;
+    display: flex;
+
+}
+
 .title {
     display: inline;
     font-weight: bold;

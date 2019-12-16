@@ -3,7 +3,8 @@ import {
     RESET_TILES,
     SET_TILE_COUNT,
     TOGGLE_CELEBRATION,
-    TOGGLE_FLIP_ALL_TILES
+    TOGGLE_FLIP_ALL_TILES,
+    TOGGLE_CONTROL_PANEL_VISIBILITY
 } from "../constants/actionTypes";
 
 export function setTileCount(tileCount) {
@@ -23,5 +24,9 @@ export function resetTiles() {
 }
 
 export function toggleCelebration() {
-    return {type: TOGGLE_CELEBRATION}
+    return {type: TOGGLE_CELEBRATION};
+}
+
+export function toggleControlPanelVisibility() {
+  return {type: TOGGLE_CONTROL_PANEL_VISIBILITY};
 }

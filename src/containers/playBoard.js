@@ -13,6 +13,7 @@ const mapStateToProps = (state, ownProps) => {
         tileCount: state.fp.tileCount,
         selectedStateMatrix: state.fp.selectedStateMatrix,
         celebration: state.fp.celebration,
+        showControlPanel: state.fp.showControlPanel,
     };
 };
 
@@ -32,6 +33,7 @@ class PlayBoard extends Component {
             tileCount: storeData.fp.tileCount,
             selectedStateMatrix: storeData.fp.selectedStateMatrix,
             celebration: storeData.fp.celebration,
+            showControlPanel: storeData.fp.showControlPanel,
         });
     }
 
@@ -43,6 +45,7 @@ class PlayBoard extends Component {
             state.tileCount = storeData.fp.tileCount;
             state.selectedStateMatrix = storeData.fp.selectedStateMatrix;
             state.celebration = storeData.fp.celebration;
+            state.showControlPanel = storeData.fp.showControlPanel;
             return state;
         }
         return null;
@@ -86,6 +89,10 @@ class PlayBoard extends Component {
 
     render() {
         let cards = this._generateMatrixDivs();
+        let controlPanel;
+        if (this.state.showControlPanel) {
+          controlPanel = (<ControlPanel store={this.props.store} />);
+        }
         let celebrate;
         if (this.state.celebration) {
             celebrate = (<Celebration/>);
@@ -93,7 +100,7 @@ class PlayBoard extends Component {
         return (
             <div className={styles.container}>
                 {celebrate}
-                <ControlPanel store={this.props.store} />
+                {controlPanel}
                 <div className={styles.cardsContainer}>
                     {cards}
                 </div>

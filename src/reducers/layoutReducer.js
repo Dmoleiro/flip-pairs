@@ -3,7 +3,8 @@ import {
     RESET_TILES,
     SET_TILE_COUNT,
     TOGGLE_CELEBRATION,
-    TOGGLE_FLIP_ALL_TILES
+    TOGGLE_FLIP_ALL_TILES,
+    TOGGLE_CONTROL_PANEL_VISIBILITY
 } from '../constants/actionTypes';
 import {flipTile, generateSelectedStateMatrix, toggleMatrixState} from "../helpers/layoutHelpers";
 
@@ -45,6 +46,11 @@ export default(state, action) => {
               ...state,
               celebration: !state.celebration,
           };
+      case TOGGLE_CONTROL_PANEL_VISIBILITY:
+          return {
+            ...state,
+            showControlPanel: !state.showControlPanel,
+          }
     default:
       return state;
   }

@@ -3,6 +3,7 @@ import {NOT_BY_NOT} from "./gameComplexities";
 
 export default {
     tileCount: NOT_BY_NOT,
+    showControlPanel: true,
     previewFlip : true,
     selectedStateMatrix: generateSelectedStateMatrix(NOT_BY_NOT),
     celebration: false
