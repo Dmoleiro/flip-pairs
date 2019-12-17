@@ -7,6 +7,18 @@
     height: 100%;
     width: 100%;
 }
+
+.topBar {
+  height: 30px;
+  width: 100%;
+}
+
+.settingsCog {
+  height: 100%;
+  float: right;
+  margin: 3px 3px 0 0;
+}
+
 .matrixLine {
     display: flex;
     flex-direction: row;

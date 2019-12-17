@@ -18,6 +18,7 @@ export default(state, action) => {
             selectedStateMatrix: generateSelectedStateMatrix(action.tileCount),
             previewFlip: true,
             celebration: false,
+            showControlPanel: false,
         };
       case RESET_TILES:
         return {
@@ -25,6 +26,7 @@ export default(state, action) => {
             selectedStateMatrix: generateSelectedStateMatrix(state.tileCount),
             previewFlip: true,
             celebration: false,
+            showControlPanel: false,
         };
       case TOGGLE_FLIP_ALL_TILES:
           newSelectedStateMatrix = toggleMatrixState(state.selectedStateMatrix.slice(), action.forceState, action.flipDone);

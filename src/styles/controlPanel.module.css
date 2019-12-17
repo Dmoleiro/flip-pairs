@@ -18,6 +18,7 @@
     height: 100vh;
     overflow: hidden;
     background: #5e5e5f99;
+    z-index: 1;
 }
 
 .modal {
@@ -28,7 +29,6 @@
     background: #ffffff;
     border-radius: 5px;
     display: flex;
-
 }
 
 .title {
@@ -93,6 +93,7 @@ input:checked + label:before {
 }
 
 .reset {
+    border-radius: 0 0 5px 5px;
     background: red;
     font-size: 1rem;
     font-weight: bold;

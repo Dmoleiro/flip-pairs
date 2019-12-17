@@ -5,7 +5,7 @@ import styles from '../styles/playBoard.module.css';
 import Card from '../components/card';
 import ControlPanel from '../components/controlPanel';
 //actions
-import {toggleFlipTile} from "../actions/layoutActions";
+import {toggleFlipTile, toggleControlPanelVisibility} from "../actions/layoutActions";
 import Celebration from "../components/celebration";
 
 const mapStateToProps = (state, ownProps) => {
@@ -101,6 +101,9 @@ class PlayBoard extends Component {
             <div className={styles.container}>
                 {celebrate}
                 {controlPanel}
+                <div className={styles.topBar}>
+                  <img className={styles.settingsCog} alt='cog' src={process.env.PUBLIC_URL + '/assets/settings.svg'} onClick={() => this.props.store.dispatch(toggleControlPanelVisibility())}/>
+                </div>
                 <div className={styles.cardsContainer}>
                     {cards}
                 </div>
