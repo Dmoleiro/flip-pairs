@@ -4,6 +4,7 @@ import styles from '../styles/playBoard.module.css';
 // components
 import Card from '../components/card';
 import ControlPanel from '../components/controlPanel';
+import Timer from '../components/timer';
 //actions
 import {toggleFlipTile, toggleControlPanelVisibility} from "../actions/layoutActions";
 import Celebration from "../components/celebration";
@@ -102,6 +103,7 @@ class PlayBoard extends Component {
                 {celebrate}
                 {controlPanel}
                 <div className={styles.topBar}>
+                  <Timer store={this.props.store}/>
                   <img className={styles.settingsCog} alt='cog' src={process.env.PUBLIC_URL + '/assets/settings.svg'} onClick={() => this.props.store.dispatch(toggleControlPanelVisibility())}/>
                 </div>
                 <div className={styles.cardsContainer}>
