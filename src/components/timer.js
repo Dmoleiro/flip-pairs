@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styles from '../styles/timer.module.css';
-import {FINISHED, HALTED, STARTED} from '../constants/gameStates';
+import {FINISHED, HALTED, STARTED, RESET} from '../constants/gameStates';
+import {startTimer} from '../actions/layoutActions';
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -40,6 +41,15 @@ class Timer extends Component {
       } else if (this.state.timer !== undefined && this.state.running === false &&
           this.props.store.getState().fp.gameState === STARTED) {
           this.resumeTimer();
+      } else if (this.state.timer !== undefined && this.state.running === true &&
+          this.props.store.getState().fp.gameState === RESET) {
+          this.setState({
+              ...this.state,
+              timer: undefined,
+              running: false,
+          });
+          this.toggleTimer();
+          this.props.store.dispatch(startTimer);
       }
     }
 
@@ -56,8 +66,8 @@ class Timer extends Component {
 
     toggleTimer() {
       let timerFunc = undefined;
+      clearInterval(this.state.timer);
       if (this.state.timer) {
-          clearInterval(this.state.timer);
           this.setState({
               ...this.state,
               timer: undefined,

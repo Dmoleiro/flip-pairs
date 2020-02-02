@@ -33,10 +33,19 @@
 
 .title {
     border-radius: 5px 5px 0 0;
-    background: #B8ED01;
     display: inline;
     font-weight: bold;
     flex: 1;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    background: #B8ED01;
+    border: 1px solid rgba(0,0,0,0.15);
+    transition: all 0.3s ease-out;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.5),
+      0 2px 2px rgba(0,0,0,0.3),
+      0 0 4px 1px rgba(0,0,0,0.2);
 }
 
 .box {
@@ -101,7 +110,7 @@ label:before {
 input:checked + label:before {
     border-color: white;
     border: none;
-    background: #B8ED01;
+    background: #749600;
     border: .2rem solid #ccc;
 }
 

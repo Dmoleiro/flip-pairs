@@ -7,7 +7,7 @@ import {
     TOGGLE_CONTROL_PANEL_VISIBILITY
 } from '../constants/actionTypes';
 import {flipTile, generateSelectedStateMatrix, toggleMatrixState} from "../helpers/layoutHelpers";
-import {HALTED, STARTED} from '../constants/gameStates';
+import {HALTED, STARTED, RESET} from '../constants/gameStates';
 
 export default(state, action) => {
   let newSelectedStateMatrix;
@@ -29,7 +29,7 @@ export default(state, action) => {
             previewFlip: true,
             celebration: false,
             showControlPanel: false,
-            gameState: STARTED,
+            gameState: RESET,
         };
       case TOGGLE_FLIP_ALL_TILES:
           newSelectedStateMatrix = toggleMatrixState(state.selectedStateMatrix.slice(), action.forceState, action.flipDone);
