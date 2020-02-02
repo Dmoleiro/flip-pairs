@@ -12,21 +12,61 @@
     box-sizing: inherit;
 }
 
+.modalBackground {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: #5e5e5f99;
+    z-index: 1;
+}
+
+.modal {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    background: #ffffff;
+    border-radius: 5px;
+    display: flex;
+}
+
 .title {
+    border-radius: 5px 5px 0 0;
     display: inline;
     font-weight: bold;
+    flex: 1;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    background: #B8ED01;
+    border: 1px solid rgba(0,0,0,0.15);
+    transition: all 0.3s ease-out;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.5),
+      0 2px 2px rgba(0,0,0,0.3),
+      0 0 4px 1px rgba(0,0,0,0.2);
 }
 
 .box {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     width: 100%;
     border-radius: 3px;
 }
 
+.radiosContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 .controlElement{
     flex: 1;
+    width: 100%;
+    display: flex;
 }
 
 .hidden{
@@ -70,12 +110,21 @@ label:before {
 input:checked + label:before {
     border-color: white;
     border: none;
-    background: #e00a00;
+    background: #749600;
+    border: .2rem solid #ccc;
 }
 
 .reset {
-    background: red;
+    flex: 1;
     font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
+    background: #B8ED01;
+    border: 1px solid rgba(0,0,0,0.15);
+    border-radius: 0 0 5px 5px;
+    transition: all 0.3s ease-out;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.5),
+      0 2px 2px rgba(0,0,0,0.3),
+      0 0 4px 1px rgba(0,0,0,0.2);
 }
