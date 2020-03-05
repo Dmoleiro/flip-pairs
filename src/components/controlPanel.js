@@ -54,7 +54,6 @@ class ControlPanel extends Component {
 
         return (
             <div className={styles.modalBackground} onClick={() => this.props.store.dispatch(toggleControlPanelVisibility())}>
-
                 <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
                     <div className={styles.controlPanelContainer}>
                         <div className={styles.box}>

@@ -2,27 +2,25 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styles from '../styles/timer.module.css';
 import {FINISHED, HALTED, STARTED, RESET} from '../constants/gameStates';
-import {startTimer} from '../actions/layoutActions';
 
 const mapStateToProps = (state, ownProps) => {
   return {
     gameState: state.fp.gameState,
+    tileCount: state.fp.tileCount
   };
 };
 class Timer extends Component {
     constructor(props) {
         super(props);
 
-        this.state={};
+        this.state={
+          tileCount: this.props.store.getState().fp.tileCount
+        };
     }
 
     componentDidMount() {
-        let store = this.props.store;
-        let storeData = store.getState();
-
         this.setState({
             ...this.state,
-            gameState: storeData.fp.gameState,
             millis: 0,
             timer: undefined,
             running: false,
@@ -33,35 +31,46 @@ class Timer extends Component {
     componentDidUpdate(prevProps) {
       // Typical usage (don't forget to compare props):
       if (this.state.timer === undefined &&
-            this.props.store.getState().fp.gameState === STARTED) {
+            (this.props.store.getState().fp.gameState === STARTED || 
+            this.props.store.getState().fp.gameState === RESET)) {
         this.toggleTimer();
       } else if (this.state.timer !== undefined && this.state.running &&
-          (this.props.store.getState().fp.gameState === HALTED || this.props.store.getState().fp.gameState === FINISHED)) {
+          (this.props.store.getState().fp.gameState === HALTED || 
+          this.props.store.getState().fp.gameState === FINISHED)) {
           this.pauseTimer();
       } else if (this.state.timer !== undefined && this.state.running === false &&
           this.props.store.getState().fp.gameState === STARTED) {
           this.resumeTimer();
-      } else if (this.state.timer !== undefined && this.state.running === true &&
+      } else if (this.state.timer !== undefined && this.state.running === false &&
           this.props.store.getState().fp.gameState === RESET) {
-          this.setState({
-              ...this.state,
-              timer: undefined,
-              running: false,
-          });
-          this.toggleTimer();
-          this.props.store.dispatch(startTimer);
+          this.resetTimer();
       }
     }
 
     static getDerivedStateFromProps(nextProps, state) {
-        let store = nextProps.store;
-        let storeData = store.getState();
+        let nextStore = nextProps.store;
+        let nextStoreData = nextStore.getState();
 
-        if (nextProps && storeData) {
+        if (state && nextStoreData) {
             state.gameState = nextProps.store.getState().fp.gameState;
+            if (nextStoreData.fp.tileCount !== state.tileCount){
+              state.resetTime = true;
+              state.tileCount = nextStoreData.fp.tileCount;
+            }
+            
             return state;
         }
         return null;
+    }
+
+    resetTimer() {
+      clearInterval(this.state.timer);
+      this.setState({
+        ...this.state,
+        millis: 0,
+        timer: undefined,
+        running: false,
+    });
     }
 
     toggleTimer() {
@@ -74,8 +83,8 @@ class Timer extends Component {
               running: false,
           });
       } else {
-        let startTime = new Date();
-        timerFunc = setInterval(() => this.updateMillis(startTime),1);
+        let interval = 100;
+        timerFunc = setInterval(() => this.updateMillis(interval),interval);
       }
       this.setState({
         ...this.state,
@@ -92,18 +101,19 @@ class Timer extends Component {
     }
 
     resumeTimer() {
+        let millis = this.state.resetTime ? 0 : this.state.millis;
         this.setState({
             ...this.state,
             running: true,
+            millis,
+            resetTime: false,
         });
     }
 
 
-    updateMillis(startTime) {
+    updateMillis(elapsedMs) {
         if (this.state.running){
-            let currTime = new Date();
-            let millis = currTime - startTime;
-
+            let millis = this.state.millis + elapsedMs;
             this.setState({
                 ...this.state,
                 millis,
