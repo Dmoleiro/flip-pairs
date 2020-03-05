@@ -1,4 +1,5 @@
 import {createStore, combineReducers, applyMiddleware} from 'redux';
+import thunk from 'redux-thunk'
 import reducer from './reducers';
 import middleware from './middleware';
 
@@ -13,7 +14,7 @@ export default function() {
     fp: reducer
   };
 
-  let combinedMiddleware = [middleware];
+  let combinedMiddleware = [middleware, thunk];
 
   const store = createStore(combineReducers(combinedReducer), applyMiddleware.apply(this, combinedMiddleware));
 
