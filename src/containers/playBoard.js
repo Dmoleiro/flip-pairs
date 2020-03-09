@@ -7,7 +7,7 @@ import ControlPanel from '../components/controlPanel';
 import Timer from '../components/timer';
 //actions
 import {toggleFlipTile, toggleControlPanelVisibility} from "../actions/layoutActions";
-import Celebration from "../components/celebration";
+//import Celebration from "../components/celebration";
 
 const mapStateToProps = (state, ownProps) => {
     return {
@@ -96,7 +96,7 @@ class PlayBoard extends Component {
         }
         let celebrate;
         if (this.state.celebration) {
-            celebrate = (<Celebration/>);
+            //celebrate = (<Celebration/>);
         }
         return (
             <div className={styles.container}>
