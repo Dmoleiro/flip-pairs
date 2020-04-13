@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
+import Particles from 'react-particles-js';
 import styles from '../styles/playBoard.module.css';
 // components
 import Card from '../components/card';
@@ -7,7 +8,8 @@ import ControlPanel from '../components/controlPanel';
 import Timer from '../components/timer';
 //actions
 import {toggleFlipTile, toggleControlPanelVisibility} from "../actions/layoutActions";
-//import Celebration from "../components/celebration";
+import Celebration2 from "../components/celebration2";
+import WelcomeScreen from '../components/welcomeScreen';
 
 const mapStateToProps = (state, ownProps) => {
     return {
@@ -94,13 +96,22 @@ class PlayBoard extends Component {
         if (this.state.showControlPanel) {
           controlPanel = (<ControlPanel store={this.props.store} />);
         }
+        let particles;
         let celebrate;
         if (this.state.celebration) {
-            //celebrate = (<Celebration/>);
+            celebrate = (<Celebration2 store={this.props.store}/>);
+        } else {
+            particles = (
+                <div className={styles.particleContainer}>
+                    <Particles width='100vw' height='100vh'/>
+                </div>
+            );
         }
         return (
             <div className={styles.container}>
+                <WelcomeScreen/>
                 {celebrate}
+                {particles}
                 {controlPanel}
                 <div className={styles.topBar}>
                   <Timer store={this.props.store}/>

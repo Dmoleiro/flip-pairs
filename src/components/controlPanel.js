@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from "react-redux";
 import styles from '../styles/controlPanel.module.css';
 import {resetTiles, setTileCount, toggleControlPanelVisibility} from "../actions/layoutActions";
-import {SIX_BY_SIX, TWO_BY_TWO, FOUR_BY_FOUR, NOT_BY_NOT} from "../constants/gameComplexities";
+import {SIX_BY_SIX, TWO_BY_TWO, FOUR_BY_FOUR, NOT_BY_NOT, TWO_BY_FOUR, FOUR_BY_SIX, THREE_BY_FOUR, FIVE_BY_SIX} from "../constants/gameComplexities";
 
 const mapStateToProps = (state, ownProps) => {
     return {tileCount: state.fp.tileCount};
@@ -67,13 +67,33 @@ class ControlPanel extends Component {
                               </div>
 
                               <div className={styles.controlElement}>
-                                  <input type="radio" id="radio2" name="radio1" onClick={() => this._setTileCount(FOUR_BY_FOUR, this.props.store)} defaultChecked={tileCount === FOUR_BY_FOUR}/>
-                                  <label htmlFor="radio2">{FOUR_BY_FOUR}</label>
+                                  <input type="radio" id="radio2" name="radio2" onClick={() => this._setTileCount(TWO_BY_FOUR, this.props.store)} defaultChecked={tileCount === TWO_BY_FOUR}/>
+                                  <label htmlFor="radio2">{TWO_BY_FOUR}</label>
                               </div>
 
                               <div className={styles.controlElement}>
-                                  <input type="radio" id="radio3" name="radio1" onClick={() => this._setTileCount(SIX_BY_SIX, this.props.store)} defaultChecked={tileCount === SIX_BY_SIX}/>
-                                  <label htmlFor="radio3">{SIX_BY_SIX}</label>
+                                  <input type="radio" id="radio3" name="radio3" onClick={() => this._setTileCount(THREE_BY_FOUR, this.props.store)} defaultChecked={tileCount === THREE_BY_FOUR}/>
+                                  <label htmlFor="radio3">{THREE_BY_FOUR}</label>
+                              </div>
+
+                              <div className={styles.controlElement}>
+                                  <input type="radio" id="radio4" name="radio4" onClick={() => this._setTileCount(FOUR_BY_FOUR, this.props.store)} defaultChecked={tileCount === FOUR_BY_FOUR}/>
+                                  <label htmlFor="radio4">{FOUR_BY_FOUR}</label>
+                              </div>
+
+                              <div className={styles.controlElement}>
+                                  <input type="radio" id="radio5" name="radio5" onClick={() => this._setTileCount(FOUR_BY_SIX, this.props.store)} defaultChecked={tileCount === FOUR_BY_SIX}/>
+                                  <label htmlFor="radio5">{FOUR_BY_SIX}</label>
+                              </div>
+
+                              <div className={styles.controlElement}>
+                                  <input type="radio" id="radio6" name="radio6" onClick={() => this._setTileCount(FIVE_BY_SIX, this.props.store)} defaultChecked={tileCount === FIVE_BY_SIX}/>
+                                  <label htmlFor="radio6">{FIVE_BY_SIX}</label>
+                              </div>
+
+                              <div className={styles.controlElement}>
+                                  <input type="radio" id="radio7" name="radio7" onClick={() => this._setTileCount(SIX_BY_SIX, this.props.store)} defaultChecked={tileCount === SIX_BY_SIX}/>
+                                  <label htmlFor="radio7">{SIX_BY_SIX}</label>
                               </div>
                             </div>
                             <div className={`${styles.controlElement} ${tileCount === NOT_BY_NOT ? styles.hidden : ''}`}>

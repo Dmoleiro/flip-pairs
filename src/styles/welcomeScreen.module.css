@@ -1,0 +1,57 @@
+.welcomeContainer {
+    margin: 0;
+    font-weight: 500;
+    box-sizing: border-box;
+	opacity: 1;
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+	z-index: 100;
+	top: 0;
+	visibility: visible;
+	animation: welcomeScreen 3s linear forwards;
+}
+
+section {
+    width: 100%;
+    display: table;
+    margin: 0;
+    max-width: none;
+	background: #ccc;
+    height: 100vh;
+}
+
+.logo {
+    position: absolute;
+	top: 50%;
+    left: 50%;
+    height: 130px;
+    transform: translate(-50%, -50%) rotateY( 0deg );
+    animation: rotate 1.5s ease-in-out infinite;
+}
+
+@keyframes welcomeScreen {
+	0%,
+	80% {
+		opacity: 1;
+		height: 100vh;
+	 }
+	90% {
+		opacity: 0.9;
+		height: 100vh;
+	}
+	100% {
+		opacity: 0;
+		height: 0;
+		position: relative;
+		visibility: hidden;
+	}
+}
+@keyframes rotate {
+	50% {
+        transform: translate(-50%, -50%) rotateY( 180deg );
+	}
+	100% {
+		transform: translate(-50%, -50%) rotateY( 0deg );
+	}
+}

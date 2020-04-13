@@ -39,7 +39,8 @@
     font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
-    background: #B8ED01;
+    color:#ffffff;
+    background: #c3211c;
     border: 1px solid rgba(0,0,0,0.15);
     transition: all 0.3s ease-out;
     box-shadow:
@@ -60,6 +61,7 @@
   flex: 1;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
 }
 
@@ -85,7 +87,6 @@ label {
     cursor: pointer;
     padding: 1rem 1rem 1rem 3rem;
     position: relative;
-    whitespace: no-wrap;
     overflow: hidden;
     text-overflow: ellipsis;
     transition: all .15s ease;
@@ -108,9 +109,9 @@ label:before {
 
 
 input:checked + label:before {
-    border-color: white;
+    border-color: #ffffff;
     border: none;
-    background: #749600;
+    background: #910904;
     border: .2rem solid #ccc;
 }
 
@@ -119,7 +120,8 @@ input:checked + label:before {
     font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
-    background: #B8ED01;
+    background: #c3211c;
+    color:#ffffff;
     border: 1px solid rgba(0,0,0,0.15);
     border-radius: 0 0 5px 5px;
     transition: all 0.3s ease-out;

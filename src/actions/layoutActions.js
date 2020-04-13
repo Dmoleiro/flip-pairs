@@ -5,7 +5,8 @@ import {
     TOGGLE_CELEBRATION,
     TOGGLE_FLIP_ALL_TILES,
     TOGGLE_CONTROL_PANEL_VISIBILITY,
-    START_TIMER
+    START_TIMER,
+    RESET_GAME
 } from "../constants/actionTypes";
 
 export function setTileCount(tileCount) {
@@ -34,4 +35,8 @@ export function toggleControlPanelVisibility() {
 
 export function startTimer() {
   return {type: START_TIMER};
+}
+
+export function resetGame() {
+    return {type: RESET_GAME};
 }

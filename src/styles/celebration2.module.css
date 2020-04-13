@@ -1,0 +1,78 @@
+.celebrationContainer {
+  position: absolute;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  height: 100vh;
+  background: #00000099;
+}
+
+.reset {
+  position: absolute;
+  transform: translate(-50%);
+  left: 50%;
+  top: 58%;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  color: #ffffff;
+  background: #c3211c;
+  border: 1px solid rgba(0,0,0,0.15);
+  border-radius: 5px;
+  width: 130px;
+  text-align: center;
+  height: 30px;
+  line-height: 30px;
+  transition: all 0.3s ease-out;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.5),
+    0 2px 2px rgba(0,0,0,0.3),
+    0 0 4px 1px rgba(0,0,0,0.2);
+}
+
+.celebrationText {
+  animation: celebrationText 2s ease-in-out both;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  font-size: 72px;
+  font-weight: bolder;
+  background-image: linear-gradient(45deg, #000000 10%, #c3211c 80%);
+  background-clip: text;
+  z-index: 5;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 1px #ffffff;
+}
+
+@keyframes celebrationText {
+  0% {
+    -webkit-transform: translateY(0) rotateX(0) scale(1);
+            transform: translateY(0) rotateX(0) scale(1);
+    -webkit-transform-origin: 50% 0%;
+            transform-origin: 50% 0%;
+  }
+  25% {
+    -webkit-transform: translateY(-50%) rotateX(-90deg) scale(2);
+            transform: translateY(-50%) rotateX(-90deg) scale(2);
+    -webkit-transform-origin: 50% 50%;
+            transform-origin: 50% 50%;
+  }
+  50% {
+    -webkit-transform: translateY(-100%) rotateX(-180deg) scale(1);
+            transform: translateY(-100%) rotateX(-180deg) scale(1);
+    -webkit-transform-origin: 50% 100%;
+            transform-origin: 50% 100%;
+  }
+  75% {
+    -webkit-transform: translateY(-50%) rotateX(-90deg) scale(2);
+            transform: translateY(-50%) rotateX(-90deg) scale(2);
+    -webkit-transform-origin: 50% 50%;
+            transform-origin: 50% 50%;
+  }
+  100% {
+    -webkit-transform: translateY(0) rotateX(0) scale(1);
+            transform: translateY(0) rotateX(0) scale(1);
+    -webkit-transform-origin: 50% 0%;
+            transform-origin: 50% 0%;
+  }
+}

@@ -1,37 +1,40 @@
-import {SIX_BY_SIX, TWO_BY_TWO, FOUR_BY_FOUR, NOT_BY_NOT} from "../constants/gameComplexities";
+import {SIX_BY_SIX, TWO_BY_TWO, FOUR_BY_FOUR, NOT_BY_NOT, TWO_BY_FOUR, FOUR_BY_SIX, THREE_BY_FOUR, FIVE_BY_SIX} from "../constants/gameComplexities";
 
 export function generateSelectedStateMatrix(complexity) {
     let selectedStateMatrix;
     if (complexity > NOT_BY_NOT) {
         let urlList = createUrlList(complexity / 2);
+        let columnCount = 0;
+        let rowCount = 0;
         switch (complexity) {
             case TWO_BY_TWO:
             case FOUR_BY_FOUR:
             case SIX_BY_SIX:
-                let rowItemCount = Math.sqrt(complexity);
-                selectedStateMatrix = new Array(rowItemCount);
-
-                for (let i = 0; i < selectedStateMatrix.length; i++) {
-                    selectedStateMatrix[i] = new Array(rowItemCount);
-                    for (let j = 0; j < selectedStateMatrix[i].length; j++) {
-                        let urlIndex = Math.floor(Math.random() * urlList.length)
-                        selectedStateMatrix[i][j] = {
-                            flipped: true,
-                            done: false,
-                            url: urlList[urlIndex].url,
-                            imgId: urlList[urlIndex].originalIdx,
-                        };
-
-                        urlList[urlIndex].timesUsed = urlList[urlIndex].timesUsed + 1;
-                        if (urlList[urlIndex].timesUsed > 1) {
-                            urlList.splice(urlIndex, 1);
-                        }
-                    }
-                }
+                columnCount = Math.sqrt(complexity);
+                rowCount = columnCount; 
+                break;
+            case TWO_BY_FOUR:
+                columnCount = 2;
+                rowCount = 4;
+                break;
+            case THREE_BY_FOUR:
+                columnCount = 3;
+                rowCount = 4;
+                break;
+            case FOUR_BY_SIX:
+                columnCount = 4;
+                rowCount = 6;
+                break;
+            case FIVE_BY_SIX:
+                columnCount = 5;
+                rowCount = 6;
                 break;
             default:
+                columnCount = 2;
+                rowCount = 2;
                 break;
         }
+        selectedStateMatrix = populateStateMatrix(columnCount, rowCount, urlList);
     }
     return selectedStateMatrix;
 }
@@ -76,6 +79,30 @@ export function countFlippedCards(matrix, countUndone = false) {
         }
     }
     return flippedCount;
+}
+
+function populateStateMatrix(columnCount, rowCount, urlList) {
+    let selectedStateMatrix = new Array(rowCount);
+
+    for (let i = 0; i < selectedStateMatrix.length; i++) {
+        selectedStateMatrix[i] = new Array(columnCount);
+        for (let j = 0; j < selectedStateMatrix[i].length; j++) {
+            let urlIndex = Math.floor(Math.random() * urlList.length)
+            selectedStateMatrix[i][j] = {
+                flipped: true,
+                done: false,
+                url: urlList[urlIndex].url,
+                imgId: urlList[urlIndex].originalIdx,
+            };
+
+            urlList[urlIndex].timesUsed = urlList[urlIndex].timesUsed + 1;
+            if (urlList[urlIndex].timesUsed > 1) {
+                urlList.splice(urlIndex, 1);
+            }
+        }
+    }
+
+    return selectedStateMatrix;
 }
 
 function isCardFlippedAndUndone(card) {

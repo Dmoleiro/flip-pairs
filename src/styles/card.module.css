@@ -40,15 +40,21 @@
 
 .cardFaceFront {
     background: linear-gradient(45deg, #2c262e 10%, #c3211c 80%);
+    display: flex;
+    align-items: center;
 }
 
 .cardFaceBack {
-    background: linear-gradient(45deg, #11112e 10%, #0300c3 80%);
+    background: linear-gradient(45deg, #2c262e 10%, #c3211c 80%);
     transform: rotateY( 180deg );
 }
 
 .card.isFlipped {
     transform: rotateY(180deg);
+}
+
+.logoSmall {
+    flex: 1;
 }
 
 .cardImg {
