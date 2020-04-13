@@ -4,10 +4,12 @@ import {
     SET_TILE_COUNT,
     TOGGLE_CELEBRATION,
     TOGGLE_FLIP_ALL_TILES,
-    TOGGLE_CONTROL_PANEL_VISIBILITY
+    TOGGLE_CONTROL_PANEL_VISIBILITY,
+    RESET_GAME
 } from '../constants/actionTypes';
 import {flipTile, generateSelectedStateMatrix, toggleMatrixState} from "../helpers/layoutHelpers";
 import {HALTED, STARTED, RESET} from '../constants/gameStates';
+import defaultSoreValues from '../constants/defaultStoreValues';
 
 export default(state, action) => {
   let newSelectedStateMatrix;
@@ -50,6 +52,7 @@ export default(state, action) => {
           return {
               ...state,
               celebration: !state.celebration,
+              gameState: HALTED
           };
       case TOGGLE_CONTROL_PANEL_VISIBILITY:
           return {
@@ -57,6 +60,9 @@ export default(state, action) => {
               showControlPanel: !state.showControlPanel,
               gameState: state.showControlPanel ? STARTED : HALTED
           }
+    case RESET_GAME:
+        return defaultSoreValues;
+            
     default:
       return state;
   }
