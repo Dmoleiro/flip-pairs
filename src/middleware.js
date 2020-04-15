@@ -21,7 +21,9 @@ export default function Middleware({getState, dispatch}) {
               let flippedCardsCount = countFlippedCards(getState().fp.selectedStateMatrix, true);
               if (flippedCardsCount < 2 && !getState().fp.previewFlip) {
                   clearTimeout(window.resetTimer);
-                  window.resetTimer = setTimeout(() => dispatch(toggleFlipAllTiles(false, false)), 2000);
+                  if (flippedCardsCount === 1) {
+                    window.resetTimer = setTimeout(() => dispatch(toggleFlipAllTiles(false, false)), 2000);
+                  }
               } else {
                   action.type = IGNORE;
               }
