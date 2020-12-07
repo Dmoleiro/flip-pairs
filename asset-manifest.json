@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/flip-pairs/static/css/main.a2c8aee1.chunk.css",
+    "main.js": "/flip-pairs/static/js/main.d2e82745.chunk.js",
+    "main.js.map": "/flip-pairs/static/js/main.d2e82745.chunk.js.map",
+    "runtime-main.js": "/flip-pairs/static/js/runtime-main.a1365b90.js",
+    "runtime-main.js.map": "/flip-pairs/static/js/runtime-main.a1365b90.js.map",
+    "static/js/2.560ce466.chunk.js": "/flip-pairs/static/js/2.560ce466.chunk.js",
+    "static/js/2.560ce466.chunk.js.map": "/flip-pairs/static/js/2.560ce466.chunk.js.map",
+    "index.html": "/flip-pairs/index.html",
+    "precache-manifest.cb7a7e29e21d6b57d89ff393aa2a96e3.js": "/flip-pairs/precache-manifest.cb7a7e29e21d6b57d89ff393aa2a96e3.js",
+    "service-worker.js": "/flip-pairs/service-worker.js",
+    "static/css/main.a2c8aee1.chunk.css.map": "/flip-pairs/static/css/main.a2c8aee1.chunk.css.map"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a1365b90.js",
+    "static/js/2.560ce466.chunk.js",
+    "static/css/main.a2c8aee1.chunk.css",
+    "static/js/main.d2e82745.chunk.js"
+  ]
+}
